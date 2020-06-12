@@ -21,16 +21,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.flutter.Log;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
+
+import static android.content.ContentValues.TAG;
 
 class AccountPicker implements PluginRegistry.ActivityResultListener {
     private final Context applicationContext;
     private MethodChannel.Result pendingHintResult;
     private Activity activity;
 
-    private static final int EMAIL_HINT_REQUEST = 11011;
-    private static final int PHONE_HINT_REQUEST = 11012;
+    private static final int EMAIL_HINT_REQUEST = 711011;
+    private static final int PHONE_HINT_REQUEST = 711012;
 
     AccountPicker(Context applicationContext, @Nullable Activity activity) {
         this.applicationContext = applicationContext;
@@ -49,6 +52,8 @@ class AccountPicker implements PluginRegistry.ActivityResultListener {
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     public void requestPhoneHint(MethodChannel.Result result) {
         pendingHintResult = result;
+        Log.d(TAG, "Account Picker on Activity Result phone hint");
+        Log.d(TAG, String.valueOf(PHONE_HINT_REQUEST));
         HintRequest hintRequest = new HintRequest.Builder()
                 .setPhoneNumberIdentifierSupported(true)
                 .build();
@@ -72,7 +77,8 @@ class AccountPicker implements PluginRegistry.ActivityResultListener {
 //        final List<Account> filter = Arrays.asList(
 //                new Account("tolotrasam@gmail.com", "com.google")
 //        );
-
+        Log.d(TAG, "Account Picker on Activity Result email hint");
+        Log.d(TAG, String.valueOf(PHONE_HINT_REQUEST));
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             intent = AccountManager.newChooseAccountIntent(
                     null,
@@ -87,11 +93,13 @@ class AccountPicker implements PluginRegistry.ActivityResultListener {
         } else {
             result.error("Platform does not support API", null, null);
         }
-
     }
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "Account Picker on Activity Result");
+        Log.d(TAG, String.valueOf(resultCode));
+        Log.d(TAG, String.valueOf(requestCode));
         if (requestCode == PHONE_HINT_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
