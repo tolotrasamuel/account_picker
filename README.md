@@ -1,16 +1,17 @@
-# account_picker
+# Account Picker Plugin
 
-Pick Email and Phone number saved on device in dialog without  extra permssion.
-This plugin does not require any special permission.
-It uses (AccountPicker)[https://developers.google.com/android/reference/com/google/android/gms/common/AccountPicker#newChooseAccountIntent(com.google.android.gms.common.AccountPicker.AccountChooserOptions)] API.
+This Flutter plugin prompt suser to pick an Email or a Phone number saved on device without requiring extra permission
+It is a lightweight plugin that does not require extra permssion.
+This plugin does not require any special device permission.
+
+It uses [AccountPicker](https://developers.google.com/android/reference/com/google/android/gms/common/AccountPicker#newChooseAccountIntent(com.google.android.gms.common.AccountPicker.AccountChooserOptions)) API.
 
 This currently works for Android only.
 
 
-
-
-## TODO
-Implement the Ios method channel
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tolotrasamuel/account_picker/master/screenshot/demo.gif" alt="Demo App" style="margin:auto" width="372" height="686">
+</p>
 
 
 ## Usage to request Phone
@@ -30,3 +31,10 @@ setState(() {
     _accountType = emailResult.type;
 });
 ```
+
+
+
+
+
+## TODO
+Implement the Ios method channel

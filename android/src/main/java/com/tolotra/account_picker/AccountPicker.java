@@ -1,5 +1,6 @@
 package com.tolotra.account_picker;
 
+import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -16,7 +17,9 @@ import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
@@ -65,10 +68,15 @@ class AccountPicker implements PluginRegistry.ActivityResultListener {
     public void requestEmailHint(MethodChannel.Result result) {
         pendingHintResult = result;
         Intent intent = null;
+        final List<Account> filter = null;
+//        final List<Account> filter = Arrays.asList(
+//                new Account("tolotrasam@gmail.com", "com.google")
+//        );
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             intent = AccountManager.newChooseAccountIntent(
                     null,
-                    null,
+                    filter,
                     new String[]{"com.google", "com.google.android.legacyimap"},
                     null,
                     null,
@@ -94,9 +102,14 @@ class AccountPicker implements PluginRegistry.ActivityResultListener {
             }
             return true;
         } else if (requestCode == EMAIL_HINT_REQUEST) {
-            String accountType = data.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE);
-            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-            pendingHintResult.success(Arrays.asList(accountName, accountType));
+            if (resultCode == Activity.RESULT_OK) {
+                String accountType = data.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE);
+                String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                pendingHintResult.success(Arrays.asList(accountName, accountType));
+            }else{
+                pendingHintResult.success(null);
+            }
+            return true;
         }
         return false;
     }
