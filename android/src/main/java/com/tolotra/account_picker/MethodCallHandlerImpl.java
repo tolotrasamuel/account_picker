@@ -16,7 +16,7 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
     private static final String METHOD_CHANNEL_NAME = "account_picker";
 
     private final com.tolotra.account_picker.AccountPicker accountPicker;
-    MethodCallHandlerImpl(com.tolotra.account_picker.AccountPicker location) {
+    MethodCallHandlerImpl(AccountPicker location) {
         this.accountPicker = location;
     }
     @Nullable
@@ -30,9 +30,10 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
             accountPicker.requestEmailHint(result);
         } else if(call.method.equals("requestPhoneHint")){
             accountPicker.requestPhoneHint(result);
-        }else {
-            result.notImplemented();
         }
+//        else {
+//            result.notImplemented();
+//        }
     }
     /**
      * Registers this instance as a method call handler on the given
