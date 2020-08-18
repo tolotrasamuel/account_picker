@@ -9,7 +9,14 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      if (methodCall.method == 'requestEmailHint') {
+        return ['foo@example.com', 'google'];
+      } else {
+        if (methodCall.method == 'requestPhoneHint') {
+          return '+1234567890';
+        }
+      }
+      return null;
     });
   });
 
@@ -17,7 +24,13 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await AccountPicker.platformVersion, '42');
+  test('emailHint', () async {
+    final EmailResult emailResult = await AccountPicker.emailHint();
+    expect(emailResult.email, 'foo@example.com');
+    expect(emailResult.type, 'google');
+  });
+  test('phoneHint', () async {
+    final String phoneNumber = await AccountPicker.phoneHint();
+    expect(phoneNumber, '+1234567890');
   });
 }

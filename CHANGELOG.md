@@ -1,3 +1,9 @@
+## [1.0.2] - 18th August 2020.
+
+- Added documentation
+- Added Unit Tests
+- Formatted with Dart Format
+
 ## [1.0.1] - 12th June 2020.
 
 - Fixed RegisterWith was not adding onActivityResult listner
