@@ -1,3 +1,7 @@
+## [1.0.3] - 15th September 2020.
+
+- Re-Formatted with Dart Format
+
 ## [1.0.2] - 18th August 2020.
 
 - Added documentation

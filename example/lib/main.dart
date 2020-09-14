@@ -60,7 +60,8 @@ class _MyAppState extends State<MyApp> {
               ),
               RaisedButton(
                 onPressed: () async {
-                  final EmailResult emailResult = await AccountPicker.emailHint();
+                  final EmailResult emailResult = await AccountPicker
+                      .emailHint();
                   print(emailResult);
                   setState(() {
                     _email = emailResult.email;
