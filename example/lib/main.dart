@@ -4,7 +4,6 @@ import 'package:account_picker/account_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
