@@ -1,3 +1,7 @@
+## [1.0.5] - 15th September 2020.
+
+- Run `flutter create .`
+
 ## [1.0.4] - 15th September 2020.
 
 - Re-Formatted with Dart Format Again

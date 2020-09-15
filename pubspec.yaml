@@ -1,6 +1,6 @@
 name: account_picker
 description: Prompt user to pick an Email or a Phone number saved on device without requiring extra permission
-version: 1.0.4
+version: 1.0.5
 #author: Tolotra Samuel<tolotrasam@gmail.com>
 homepage: https://github.com/tolotrasamuel/account_picker
 documentation: https://github.com/tolotrasamuel/account_picker
