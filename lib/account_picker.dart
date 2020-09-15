@@ -22,7 +22,7 @@ class AccountPicker {
   ///
   static Future<EmailResult> emailHint() async {
     final List<dynamic> emailResult =
-    await _channel.invokeMethod('requestEmailHint');
+        await _channel.invokeMethod('requestEmailHint');
     if (emailResult != null) {
       return EmailResult._(emailResult[0], emailResult[1]);
     }

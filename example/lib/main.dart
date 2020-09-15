@@ -4,7 +4,6 @@ import 'package:account_picker/account_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -60,8 +59,8 @@ class _MyAppState extends State<MyApp> {
               ),
               RaisedButton(
                 onPressed: () async {
-                  final EmailResult emailResult = await AccountPicker
-                      .emailHint();
+                  final EmailResult emailResult =
+                      await AccountPicker.emailHint();
                   print(emailResult);
                   setState(() {
                     _email = emailResult.email;
