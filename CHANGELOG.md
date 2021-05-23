@@ -1,3 +1,7 @@
+## [2.0.0] - 24th May 2021.
+
+- Null Safety support
+
 ## [1.0.5] - 15th September 2020.
 
 - Run `flutter create .`

@@ -25,12 +25,12 @@ void main() {
   });
 
   test('emailHint', () async {
-    final EmailResult emailResult = await AccountPicker.emailHint();
+    final EmailResult emailResult = await (AccountPicker.emailHint() as FutureOr<EmailResult>);
     expect(emailResult.email, 'foo@example.com');
     expect(emailResult.type, 'google');
   });
   test('phoneHint', () async {
-    final String phoneNumber = await AccountPicker.phoneHint();
+    final String? phoneNumber = await AccountPicker.phoneHint();
     expect(phoneNumber, '+1234567890');
   });
 }
