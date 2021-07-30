@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:account_picker/account_picker.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
               Text('Email: $_email'),
               Text('Email Type: $_accountType'),
               Text('Phone Number: $_phoneNumber'),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   final String phone = await AccountPicker.phoneHint();
                   setState(() {
@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: Text('Pick Phone'),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   final EmailResult emailResult =
                       await AccountPicker.emailHint();

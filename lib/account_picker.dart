@@ -20,9 +20,9 @@ class AccountPicker {
   /// Show the email hint if available, it returns EmailResult
   /// If not available, it will never callback
   ///
-  static Future<EmailResult> emailHint() async {
-    final List<dynamic> emailResult =
-        await _channel.invokeMethod('requestEmailHint');
+  static Future<EmailResult?> emailHint() async {
+    final List<dynamic>? emailResult =
+    await _channel.invokeMethod('requestEmailHint');
     if (emailResult != null) {
       return EmailResult._(emailResult[0], emailResult[1]);
     }
@@ -33,8 +33,8 @@ class AccountPicker {
   /// Show the phone hint if available, it returns String
   /// If not available, it will never callback
   ///
-  static Future<String> phoneHint() async {
-    final String phone = await _channel.invokeMethod('requestPhoneHint');
+  static Future<String?> phoneHint() async {
+    final String? phone = await _channel.invokeMethod('requestPhoneHint');
     return phone;
   }
 }
