@@ -31,8 +31,8 @@ flutter:
       android:
         package: com.tolotra.account_picker
         pluginClass: AccountPickerPlugin
-      ios:
-        pluginClass: AccountPickerPlugin
+#      ios:
+#        pluginClass: AccountPickerPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
