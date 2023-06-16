@@ -37,4 +37,5 @@ setState(() {
 
 
 ## TODO
-Implement the Ios method channel
+Accepting PR for:
+ - https://github.com/tolotrasamuel/account_picker/issues/8 

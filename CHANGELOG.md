@@ -1,3 +1,7 @@
+## [2.1.0] - 15th June 2023.
+
+- Fix bug preventing iOS build
+
 ## [2.0.0] - 24th May 2021.
 
 - Null Safety support
