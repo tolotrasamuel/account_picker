@@ -9,14 +9,16 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  String _email;
-  String _accountType;
-  String _phoneNumber;
+  String? _email;
+  String? _accountType;
+  String? _phoneNumber;
 
   @override
   void initState() {
@@ -50,7 +52,7 @@ class _MyAppState extends State<MyApp> {
               Text('Phone Number: $_phoneNumber'),
               ElevatedButton(
                 onPressed: () async {
-                  final String phone = await AccountPicker.phoneHint();
+                  final phone = await AccountPicker.phoneHint();
                   setState(() {
                     _phoneNumber = phone;
                   });
@@ -59,12 +61,11 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  final EmailResult emailResult =
-                      await AccountPicker.emailHint();
+                  final emailResult = await AccountPicker.emailHint();
                   print(emailResult);
                   setState(() {
-                    _email = emailResult.email;
-                    _accountType = emailResult.type;
+                    _email = emailResult?.email;
+                    _accountType = emailResult?.type;
                   });
                 },
                 child: Text('Pick Email'),

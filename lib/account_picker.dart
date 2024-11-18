@@ -1,3 +1,5 @@
+import 'account_picker_platform_interface.dart';
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -12,9 +14,16 @@ class EmailResult {
 
   EmailResult._(this.email, this.type);
 }
+// class AccountPicker {
+
+// }
 
 class AccountPicker {
   static const MethodChannel _channel = const MethodChannel('account_picker');
+
+  Future<String?> getPlatformVersion() {
+    return AccountPickerPlatform.instance.getPlatformVersion();
+  }
 
   ///
   /// Show the email hint if available, it returns EmailResult
@@ -22,7 +31,7 @@ class AccountPicker {
   ///
   static Future<EmailResult?> emailHint() async {
     final List<dynamic>? emailResult =
-    await _channel.invokeMethod('requestEmailHint');
+        await _channel.invokeMethod('requestEmailHint');
     if (emailResult != null) {
       return EmailResult._(emailResult[0], emailResult[1]);
     }

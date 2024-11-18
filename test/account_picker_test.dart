@@ -1,18 +1,29 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:account_picker/account_picker.dart';
+import 'package:account_picker/account_picker_platform_interface.dart';
+import 'package:account_picker/account_picker_method_channel.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+class MockAccountPickerPlatform
+    with MockPlatformInterfaceMixin
+    implements AccountPickerPlatform {
+
+  @override
+  Future<String?> getPlatformVersion() => Future.value('42');
+}
 
 void main() {
-  const MethodChannel channel = MethodChannel('account_picker');
+  final AccountPickerPlatform initialPlatform = AccountPickerPlatform.instance;
 
-  TestWidgetsFlutterBinding.ensureInitialized();
-
-  setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
-    });
+  test('$MethodChannelAccountPicker is the default instance', () {
+    expect(initialPlatform, isInstanceOf<MethodChannelAccountPicker>());
   });
 
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
+  test('getPlatformVersion', () async {
+    AccountPicker accountPickerPlugin = AccountPicker();
+    MockAccountPickerPlatform fakePlatform = MockAccountPickerPlatform();
+    AccountPickerPlatform.instance = fakePlatform;
+
+    expect(await accountPickerPlugin.getPlatformVersion(), '42');
   });
 }
