@@ -2,9 +2,7 @@ package com.tolotra.account_picker
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
-import androidx.activity.ComponentActivity
-import androidx.annotation.RequiresApi
+import android.util.Log
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -20,11 +18,9 @@ class AccountPickerPlugin : AccountPickerPluginMethod(), ActivityAware {
     // ActivityAware Methods
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         activity = binding.activity
-        val componentActivity = activity as? ComponentActivity
-            ?: throw IllegalStateException("Activity must extend ComponentActivity to use registerForActivityResult")
-
-        accountPicker = AccountPicker(componentActivity)
-//        binding.addActivityResultListener(accountPicker)
+        val instance = AccountPickerActivityResult(activity)
+        accountPicker = instance
+        binding.addActivityResultListener(instance);
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
@@ -34,11 +30,7 @@ class AccountPickerPlugin : AccountPickerPluginMethod(), ActivityAware {
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         activity = binding.activity
-
-        val componentActivity = activity as? ComponentActivity
-            ?: throw IllegalStateException("Activity must extend ComponentActivity to use registerForActivityResult")
-
-        accountPicker = AccountPicker(componentActivity)
+        accountPicker = AccountPickerActivityResult(activity)
 //        binding.addActivityResultListener(accountPicker!!)
     }
 
@@ -49,8 +41,9 @@ class AccountPickerPlugin : AccountPickerPluginMethod(), ActivityAware {
 }
 
 abstract class AccountPickerPluginMethod : AccountPickerPluginEngine() {
-    @RequiresApi(Build.VERSION_CODES.M)
+//    @RequiresApi(Build.VERSION_CODES.M)
     override fun onMethodCall(call: MethodCall, result: Result) {
+        Log.d("AccountPickerPlugin", "onMethodCall: ${call.method}")
         if (call.method == "getPlatformVersion") {
             result.success("Android ${android.os.Build.VERSION.RELEASE}")
         } else if (call.method == "requestEmailHint") {
@@ -68,7 +61,7 @@ abstract class AccountPickerPluginEngine : FlutterPlugin, MethodCallHandler {
     /// Reference to the Activity and Context
     var activity: Activity? = null
     var context: Context? = null
-    var accountPicker: AccountPicker? = null
+    var accountPicker: AccountPickerActivityResult? = null
 
     /// The MethodChannel that will the communication between Flutter and native Android
     ///

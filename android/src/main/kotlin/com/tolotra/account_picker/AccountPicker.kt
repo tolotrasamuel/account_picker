@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.annotation.Nullable
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.credentials.HintRequest
@@ -24,6 +25,10 @@ import io.flutter.plugin.common.PluginRegistry
 import java.util.UUID
 import androidx.activity.result.ActivityResultCallback as ActivityResultCallback1
 
+/// Cannot be used for now
+// because the current approach requires changing FlutterActivity to FlutterFragmentActivity
+// we could ask the user to change it manually, but it would be a breaking change
+// https://stackoverflow.com/questions/79201562/startactivityforresult-is-deprecated-how-to-use-registerforactivityresult-in-fl
 class AccountPicker(
     private var activity: Activity?
 ) {
@@ -32,6 +37,9 @@ class AccountPicker(
     companion object {
         private const val TAG = "AccountPicker"
     }
+    private  val componentActivity: ComponentActivity
+        get() = activity as? ComponentActivity
+            ?: throw IllegalStateException("Activity must extend ComponentActivity to use registerForActivityResult")
 
     // context getter
     private val applicationContext: Context?
@@ -58,10 +66,6 @@ class AccountPicker(
         val googleApiClient = GoogleApiClient.Builder(context)
             .addApi(Auth.CREDENTIALS_API)
             .build()
-
-
-        val componentActivity = activity as? ComponentActivity
-            ?: throw IllegalStateException("Activity must extend ComponentActivity to use registerForActivityResult")
 
         val resultLauncher =
             componentActivity.registerActivityResultLauncher(ActivityResultContracts.StartIntentSenderForResult()) { result ->
@@ -104,10 +108,7 @@ class AccountPicker(
         )
 
 
-        val componentActivity = activity as? ComponentActivity
-            ?: throw IllegalStateException("Activity must extend ComponentActivity to use registerForActivityResult")
-
-        val resultLauncher =
+          val resultLauncher =
             componentActivity.registerActivityResultLauncher(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode != Activity.RESULT_OK) {
                     pendingHintResult?.success(null)

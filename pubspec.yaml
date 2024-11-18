@@ -1,7 +1,9 @@
 name: account_picker
-description: "A new Flutter project."
-version: 0.0.1
-homepage:
+description: Prompt user to pick an Email or a Phone number saved on device without requiring extra permission
+version: 2.2.0
+#author: Tolotra Samuel<tolotrasam@gmail.com>
+homepage: https://github.com/tolotrasamuel/account_picker
+documentation: https://github.com/tolotrasamuel/account_picker
 
 environment:
   sdk: '>=3.4.3 <4.0.0'

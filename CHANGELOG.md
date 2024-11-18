@@ -1,3 +1,10 @@
+## [2.2.0] - 18th Nov 2024.
+
+- Updated to support Flutter 3.22.2
+- Updated to Purely Kotlin
+- Using registerActivityForResult instead of startActivityForResult
+- Removed iOS support
+
 ## [2.1.0] - 15th June 2023.
 
 - Fix bug preventing iOS build
