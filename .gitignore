@@ -8,4 +8,7 @@ build/
 flutter_sdk
 
 # FVM Version Cache
+.fvm/.idea/workspace.xml
+
 .fvm/
+
