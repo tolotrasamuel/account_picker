@@ -12,3 +12,6 @@ flutter_sdk
 
 .fvm/
 
+
+node_modules/
+
